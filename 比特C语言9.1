@@ -1,0 +1,43 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#include <stdio.h>
+#include <stdlib.h>
+int left, right,i;
+int binary_search(int arr[], int k, int sz)//arr后一定要加[]，要不然是实参与形参不兼容。
+{
+	right = sz - 1;
+	left = 0;
+	while (left <= right)
+	{
+		i = (left + right) / 2;
+		if (k > arr[i])//这里判断大小要注意
+		{
+			left = i+1;
+		}
+		if (k < arr[i])
+		{
+			right = i-1;
+		}
+		if (k == arr[i])
+		{
+			return i;
+		}
+	}
+	return -1;
+}
+int main()
+{
+	int arr[] = { 1,2,3,4,5,6,7,8,9 };
+	int k = 7;
+	int sz = sizeof(arr) / sizeof(arr[1]);
+	int ret = binary_search(arr, k, sz);
+	if (ret == -1)
+	{
+		printf("未找到\n");
+	}
+	else
+	{
+		printf("找到了，下标为%d\n", ret);
+	}
+	
+	return 0;
+}
